@@ -14,8 +14,6 @@ namespace ProjectEuler.Core
 
 		public static IEnumerable<long> Divisors(this long n)
 		{
-			var divisors = new List<long>();
-
 			// 1から順に割り切れる数を探します。
 			// 割り切れた場合、nをその数で割ったものも約数になります。
 			// 「割り切れた場合の割った数」を [小さい約数]、
@@ -35,17 +33,13 @@ namespace ProjectEuler.Core
 					minorDivisor = counter;
 					greaterDivisor = n / minorDivisor;
 
-					// それぞれの約数を約数リストに追加します。
-					divisors.Add(minorDivisor);
-					divisors.Add(greaterDivisor);
+					// それぞれの約数を返します。
+					yield return minorDivisor;
+					yield return greaterDivisor;
 				}
 
 				counter++;
 			}
-
-			// 約数リストをソートして返します。
-			divisors.Sort();
-			return new HashSet<long>(divisors);
 		}
 	}
 }
