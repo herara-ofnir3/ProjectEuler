@@ -14,25 +14,39 @@ namespace ProjectEuler.Problem2
 		static void Main(string[] args)
 		{
 			int n = 4000000;
-			int answer = 0;
-
-			int previous = 1;
-			int current = 2;
-			int next = 0;
-
-			do
-			{
-				if (current % 2 == 0)
-					answer += current;
-
-				next = current + previous;
-				previous = current;
-				current = next;
-
-			} while (current < n);
+			var answer = FibonacciNumbers(n - 1)
+				.Where(i => i%2 == 0)
+				.Sum();
 
 			Console.WriteLine(answer);
 			Console.ReadLine();
+		}
+
+		static IEnumerable<int> FibonacciNumbers(int max)
+		{
+			foreach (var i in FibonacciNumbers())
+			{
+				if (max < i)
+					yield break;
+
+				yield return i;
+			}
+		} 
+
+		static IEnumerable<int> FibonacciNumbers()
+		{
+			var previous = 0;
+			var current = 1;
+			var next = 0;
+
+			while (true)
+			{
+				next = previous + current;
+				yield return next;
+
+				previous = current;
+				current = next;
+			}
 		}
 	}
 }
