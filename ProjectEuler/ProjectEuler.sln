@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler.Problem12", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler.Core", "ProjectEuler.Core\ProjectEuler.Core.csproj", "{7359FCDE-331E-4D08-A453-CEA66ECFAEB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler.Problem11", "ProjectEuler.Problem11\ProjectEuler.Problem11.csproj", "{E835A9E7-2CAD-495B-8B50-66332A1A0F28}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -159,6 +161,16 @@ Global
 		{7359FCDE-331E-4D08-A453-CEA66ECFAEB3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7359FCDE-331E-4D08-A453-CEA66ECFAEB3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{7359FCDE-331E-4D08-A453-CEA66ECFAEB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Debug|x86.ActiveCfg = Debug|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Debug|x86.Build.0 = Debug|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Release|Any CPU.ActiveCfg = Release|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Release|Mixed Platforms.Build.0 = Release|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Release|x86.ActiveCfg = Release|x86
+		{E835A9E7-2CAD-495B-8B50-66332A1A0F28}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
