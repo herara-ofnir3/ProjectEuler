@@ -13,27 +13,20 @@ namespace ProjectEuler.Problem3
 		/// <param name="args"></param>
 		static void Main(string[] args)
 		{
-			long n = 600851475143;
+			var n = 600851475143;
 
 			// まず約数を求め、その中から素数を見つけることで素因数を獲得します。
-			var divisors = DivisorsFor(n);
-			var primeFactors = FindPrimers(divisors);
-
-			var answer = primeFactors.Max();
+			var answer = n.Divisors().Primers().Max();
 			Console.WriteLine(answer);
 
 			Console.ReadLine();
 		}
+	}
 
-		/// <summary>
-		/// 約数を求めます。
-		/// </summary>
-		/// <param name="n">約数を求める数</param>
-		/// <returns></returns>
-		private static ISet<long> DivisorsFor(long n)
+	public static class NumberHelper
+	{
+		public static IEnumerable<long> Divisors(this long n)
 		{
-			var divisors = new List<long>();
-
 			// 1から順に割り切れる数を探します。
 			// 割り切れた場合、nをその数で割ったものも約数になります。
 			// 「割り切れた場合の割った数」を [小さい約数]、
@@ -41,40 +34,30 @@ namespace ProjectEuler.Problem3
 
 			// 最後に登場した [大きい約数] より大きな約数が現れることは無いので、
 			// ループの条件は [最後に現れた大きい約数よりカウンタが小さい間] です。
-			long minorDivisor = 1;
-			long greaterDivisor = n;
-			var counter = minorDivisor;
+			long minor = 1;
+			long greater = n;
+			var counter = minor;
 
-			while (counter < greaterDivisor)
+			while (counter < greater)
 			{
 				if (n % counter == 0)
 				{
 					// 小さい約数と大きい約数を求めます。
-					minorDivisor = counter;
-					greaterDivisor = n / minorDivisor;
+					minor = counter;
+					greater = n / minor;
 
-					// それぞれの約数を約数リストに追加します。
-					divisors.Add(minorDivisor);
-					divisors.Add(greaterDivisor);
+					yield return minor;
+					yield return greater;
 				}
 
 				counter++;
-			}
+			}			
+		} 
 
-			// 約数リストをソートして返します。
-			divisors.Sort();
-			return new HashSet<long>(divisors);
-		}
-
-		/// <summary>
-		/// 整数のコレクションから素数を検索します。
-		/// </summary>
-		/// <param name="numbers"></param>
-		/// <returns></returns>
-		private static IEnumerable<long> FindPrimers(IEnumerable<long> numbers)
+		public static IEnumerable<long> Primers(this IEnumerable<long> numbers)
 		{
 			// エラトステネスの篩を利用して素数リストを取得します。
-			var exproleList = new List<long>(numbers.Where(i => i != 1));
+			var exproleList = new List<long>(numbers.Where(i => i != 1).OrderBy(i => i));
 			var primers = new List<long>();
 
 			long firstNumber = 0;
@@ -98,6 +81,6 @@ namespace ProjectEuler.Problem3
 			return primers
 				.Concat(exproleList)
 				.OrderBy(i => i);
-		}
+		} 
 	}
 }
