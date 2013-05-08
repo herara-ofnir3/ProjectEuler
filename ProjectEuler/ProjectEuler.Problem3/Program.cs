@@ -16,7 +16,7 @@ namespace ProjectEuler.Problem3
 			var n = 600851475143;
 
 			// まず約数を求め、その中から素数を見つけることで素因数を獲得します。
-			var answer = n.Divisors().Primers().Max();
+			var answer = n.Divisors().Where(i => i.IsPrime()).Max();
 			Console.WriteLine(answer);
 
 			Console.ReadLine();
@@ -54,33 +54,18 @@ namespace ProjectEuler.Problem3
 			}			
 		} 
 
-		public static IEnumerable<long> Primers(this IEnumerable<long> numbers)
+		public static bool IsPrime(this long n)
 		{
-			// エラトステネスの篩を利用して素数リストを取得します。
-			var exproleList = new List<long>(numbers.Where(i => i != 1).OrderBy(i => i));
-			var primers = new List<long>();
+			if (n < 2) return false;
+			if (n == 2) return true;
+			if (n%2 == 0) return false;
 
-			long firstNumber = 0;
-			long primersMax = 0;
-
-			do
+			for (var i = 3; i*i < n; i += 2)
 			{
-				// 探索リストの先頭を素数リストに移動します。
-				firstNumber = exproleList.First();
-				primers.Add(firstNumber);
+				if (n%i == 0) return false;
+			}
 
-				// 探索リストから移動した素数リストの倍数を削除します。
-				exproleList.RemoveAll(i => i % firstNumber == 0);
-
-				// 探索リストが存在しなくなるか、
-				// [探索リストの最大数] より [素数リストの最大数の平方] の方が大きくなるまで続けます。
-				primersMax = primers.Max();
-			} while (exproleList.Any() && exproleList.Max() >= primersMax * primersMax);
-
-			// 素数リストと、探索リストに残った数が素数となります。
-			return primers
-				.Concat(exproleList)
-				.OrderBy(i => i);
-		} 
+			return true;
+		}
 	}
 }
