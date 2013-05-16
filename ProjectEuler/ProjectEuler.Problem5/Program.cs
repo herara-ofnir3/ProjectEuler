@@ -15,15 +15,12 @@ namespace ProjectEuler.Problem5
 		{
 			int n = 20;
 
-			int multiple = n;
-			int counter = multiple;
+			int multiple = 1;
+			int counter = 1;
 
 			var numbers = Enumerable.Range(1, n);
 
-			// 大きい数から順に最小公倍数を求めていきます。
-			// 現在の最小公倍数をカウントアップしていき、
-			// そのときの整数で割り切れたらそれが新しい最小公倍数です。
-			foreach (var i in numbers.Reverse())
+			foreach (var i in numbers)
 			{
 				while (counter % i != 0)
 				{
