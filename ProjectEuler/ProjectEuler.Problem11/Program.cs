@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ProjectEuler.Problem11
 {
@@ -55,7 +56,64 @@ namespace ProjectEuler.Problem11
 				lines.Add(vertical);
 			}
 
-			//TODO:斜めの走査
+			// 右上から走査
+			for (var i = 0; i < width; i++)
+			{
+				var diagonal = new List<int>();
+				for (var y = 0; y <= i; y++)
+				{
+					var x = (width - 1) - i + y;
+					diagonal.Add(grid[y, x]);
+				}
+				lines.Add(diagonal);
+			}
+
+			// 左下から走査
+			for (var i = 0; i < height; i++)
+			{
+				var diagonal = new List<int>();
+				for (var x = 0; x <= i; x++)
+				{
+					var y = (height - 1) - i + x;
+					diagonal.Add(grid[y, x]);
+				}
+				lines.Add(diagonal);
+			}
+
+			// 左上から走査
+			for (var i = 0; i < width; i++)
+			{
+				var diagonal = new List<int>();
+				for (var x = 0; x <= i; x++)
+				{
+					var y = i - x;
+					diagonal.Add(grid[y, x]);
+				}
+				lines.Add(diagonal);
+			}
+
+			// 右下から走査
+			for (var i = 0; i < height; i++)
+			{
+				var diagonal = new List<int>();
+				for (var j = 0; j <= i; j++)
+				{
+					var y = (height - i - 1) + j;
+					var x = (width - 1) - j;
+					diagonal.Add(grid[y, x]);
+				}
+				lines.Add(diagonal);
+			}
+
+			var result = lines
+				.Where(x => 4 <= x.Count)
+				.Select(x =>
+					x.Select((n, i) =>
+						n *
+						x.ElementAtOrDefault(i + 1) *
+						x.ElementAtOrDefault(i + 2) *
+						x.ElementAtOrDefault(i + 3)).Max()
+				).Max();
 #if DEBUG
 			Console.ReadLine();
 #endif
