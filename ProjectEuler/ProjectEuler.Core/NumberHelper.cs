@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ProjectEuler.Core
 {
@@ -39,6 +37,32 @@ namespace ProjectEuler.Core
 				}
 
 				counter++;
+			}
+		}
+
+		public static IEnumerable<int> Digits(this int n, int b = 10)
+		{
+			if (n == 0)
+				yield return 0;
+
+			var q = n;
+			while (q != 0)
+			{
+				yield return q % b;
+				q /= b;
+			}
+		}
+
+		public static IEnumerable<long> Digits(this long n, int b = 10)
+		{
+			if (n == 0)
+				yield return 0;
+
+			var q = n;
+			while (q != 0)
+			{
+				yield return q % b;
+				q /= b;
 			}
 		}
 	}
