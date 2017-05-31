@@ -7,7 +7,7 @@ namespace ProjectEuler.Run
 	{
 		static void Main(string[] args)
 		{
-			var problem = new Problem15();
+			var problem = new Problem16();
 			Console.WriteLine(problem.Run());
 #if DEBUG
 			Console.ReadLine();
