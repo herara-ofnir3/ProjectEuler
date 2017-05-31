@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler.Problem13", "P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler.Problem14", "ProjectEuler.Problem14\ProjectEuler.Problem14.csproj", "{1DC532FB-2AAB-494D-BA3F-47C62A65658A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectEuler.Problem15", "ProjectEuler.Problem15\ProjectEuler.Problem15.csproj", "{AD651D53-5721-41F5-868C-0D770A49B840}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +199,18 @@ Global
 		{1DC532FB-2AAB-494D-BA3F-47C62A65658A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1DC532FB-2AAB-494D-BA3F-47C62A65658A}.Release|x86.ActiveCfg = Release|Any CPU
 		{1DC532FB-2AAB-494D-BA3F-47C62A65658A}.Release|x86.Build.0 = Release|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Debug|x86.Build.0 = Debug|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD651D53-5721-41F5-868C-0D770A49B840}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
