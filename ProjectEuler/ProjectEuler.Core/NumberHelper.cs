@@ -42,6 +42,13 @@ namespace ProjectEuler.Core
 			}
 		}
 
+		public static IEnumerable<int> TrueDivisors(this int n)
+		{
+			return Divisors((long)n)
+				.Where(i => i != n)
+				.Select(i => (int)i);
+		}
+
 		public static IEnumerable<int> Digits(this int n, int b = 10)
 		{
 			if (n == 0)

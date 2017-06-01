@@ -1,4 +1,5 @@
 ﻿using ProjectEuler.Run.Problems;
+using ProjectEuler.Run.Problems.Part2;
 using System;
 using System.Diagnostics;
 
@@ -8,7 +9,7 @@ namespace ProjectEuler.Run
 	{
 		static void Main(string[] args)
 		{
-			var problem = new Problem20_Another();
+			var problem = new Problem21();
 
 			var sw = Stopwatch.StartNew();
 			var answer = problem.Run();
