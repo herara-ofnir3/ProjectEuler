@@ -45,25 +45,6 @@ namespace ProjectEuler.Run.Problems
 				CreateNode(define, y + 1, x + 1));
 		}
 
-		static IEnumerable<Node> Search(Node node)
-		{
-			if (node == null)
-				yield break;
-
-			yield return node;
-
-			Node greator;
-			if (node.Left?.Value < node.Right?.Value)
-				greator = node.Right;
-			else
-				greator = node.Left;
-
-			foreach (var n in Search(greator))
-			{
-				yield return n;
-			}
-		}
-
 		private class Node
 		{
 			public Node(int value) : this(value, null, null) { }
