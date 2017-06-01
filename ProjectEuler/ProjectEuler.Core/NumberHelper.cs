@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace ProjectEuler.Core
 {
@@ -65,5 +67,19 @@ namespace ProjectEuler.Core
 				q /= b;
 			}
 		}
+
+		public static IEnumerable<BigInteger> Digits(this BigInteger n, int b = 10)
+		{
+			if (n == 0)
+				yield return 0;
+
+			var q = n;
+			while (q != 0)
+			{
+				yield return q % b;
+				q = q / b;
+			}
+		}
+
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using ProjectEuler.Core;
 using System;
 using System.Linq;
+using System.Numerics;
 
 namespace ProjectEuler.Run.Problems
 {
@@ -14,8 +15,8 @@ namespace ProjectEuler.Run.Problems
 	{
 		public override string Run()
 		{
-			var n = (long)Math.Pow(2, 15);
-			var answer = n.Digits().Sum();
+			var n = (BigInteger)Math.Pow(2, 1000);
+			var answer = n.Digits().Sum(x => (int)x);
 			return answer.ToString();
 		}
 	}
