@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Problem.cs" />
     <Compile Include="Problems.Part2\Problem21.cs" />
+    <Compile Include="Problems.Part2\Problem22.cs" />
     <Compile Include="Problems\Problem01.cs" />
     <Compile Include="Problems\Problem03.cs" />
     <Compile Include="Problems\Problem04.cs" />
@@ -67,6 +68,11 @@
     <Compile Include="Problems\Problem20.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -76,6 +82,17 @@
       <Project>{7359fcde-331e-4d08-a453-cea66ecfaeb3}</Project>
       <Name>ProjectEuler.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Problem22\names.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
