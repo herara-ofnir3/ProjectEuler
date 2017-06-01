@@ -45,6 +45,7 @@ namespace ProjectEuler.Core
 		public static IEnumerable<int> TrueDivisors(this int n)
 		{
 			return Divisors((long)n)
+				.Distinct()
 				.Where(i => i != n)
 				.Select(i => (int)i);
 		}
