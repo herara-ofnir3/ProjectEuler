@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ProjectEuler.Run.Problems.Part2
+namespace ProjectEuler.Run.Problems
 {
 	/// <summary>
 	/// 友愛数

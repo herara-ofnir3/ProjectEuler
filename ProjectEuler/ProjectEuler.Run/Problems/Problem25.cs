@@ -3,10 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProjectEuler.Run.Problems.Part2
+namespace ProjectEuler.Run.Problems
 {
 	/// <summary>
 	/// 「1000桁のフィボナッチ数」

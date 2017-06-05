@@ -1,11 +1,8 @@
 ﻿using ProjectEuler.Core;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProjectEuler.Run.Problems.Part2
+namespace ProjectEuler.Run.Problems
 {
 	/// <summary>
 	/// 非過剰数和

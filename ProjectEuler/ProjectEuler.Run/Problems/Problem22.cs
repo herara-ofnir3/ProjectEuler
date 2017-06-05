@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ProjectEuler.Run.Problems.Part2
+namespace ProjectEuler.Run.Problems
 {
 	public class Problem22 : Problem
 	{
