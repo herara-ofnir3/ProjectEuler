@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ProjectEuler.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectEuler.Run.Problems.Part2
 {
@@ -18,9 +17,14 @@ namespace ProjectEuler.Run.Problems.Part2
 	{
 		public override string Run()
 		{
-			var l = Primes(100).ToList();
-
-			var answer = string.Empty;
+			var primes = new HashSet<int>(Primes(1000000 - 1));
+			var circularPrimes = primes
+				.Where(p => 
+					Circulars(p.Digits())
+						.Select(c => DigitsToInt(c))
+						.All(c => primes.Contains(c)))
+				.ToList();
+			var answer = circularPrimes.Count();
 			return answer.ToString();
 		}
 
@@ -71,6 +75,11 @@ namespace ProjectEuler.Run.Problems.Part2
 			{
 				yield return m;
 			}
+		}
+
+		static int DigitsToInt(IEnumerable<int> digits)
+		{
+			return digits.Select((x, i) => x * (int)Math.Pow(10, i)).Sum();
 		}
 	}
 }
