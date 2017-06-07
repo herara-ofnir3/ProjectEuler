@@ -9,7 +9,7 @@ namespace ProjectEuler.Run
 	{
 		static void Main(string[] args)
 		{
-			var problem = new Problem41();
+			var problem = new Problem44();
 
 			var sw = Stopwatch.StartNew();
 			var answer = problem.Run();

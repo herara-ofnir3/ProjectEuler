@@ -59,6 +59,9 @@
     <Compile Include="Problems.Part2\Problem39.cs" />
     <Compile Include="Problems.Part2\Problem40.cs" />
     <Compile Include="Problems.Part2\Problem41.cs" />
+    <Compile Include="Problems.Part2\Problem42.cs" />
+    <Compile Include="Problems.Part2\Problem43.cs" />
+    <Compile Include="Problems.Part2\Problem44.cs" />
     <Compile Include="Problems\Problem21.cs" />
     <Compile Include="Problems\Problem22.cs" />
     <Compile Include="Problems\Problem23.cs" />
@@ -115,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Problem22\names.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Problem42\words.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -89,5 +89,7 @@ namespace ProjectEuler.Core
 			}
 		}
 
+		public static int DigitsToInt(this IEnumerable<int> digits) => digits.Select((x, i) => x * (int)Math.Pow(10, i)).Sum();
+		public static long DigitsToLong(this IEnumerable<int> digits) => digits.Select((x, i) => x * (long)Math.Pow(10, i)).Sum();
 	}
 }
