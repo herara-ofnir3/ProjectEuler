@@ -43,5 +43,35 @@ namespace ProjectEuler.Core
 				yield return m;
 			}
 		}
+
+		static readonly List<int> _primes = new List<int> { 2, 3, 5, 7 };
+
+		public static IEnumerable<int> Gen()
+		{
+			var last = 0;
+			foreach (var p in _primes)
+			{
+				yield return p;
+				last = p;
+			}
+
+			for (var n = last + 2; ; n += 2)
+			{
+				if (_primes.TakeWhile(p => p <= Math.Sqrt(n)).Any(p => n % p == 0))
+					continue;
+
+				yield return n;
+				_primes.Add(n);
+			}
+		}
+
+		public static bool IsPrime(int n)
+		{
+			if (n < 2) return false;
+
+			return Gen()
+				.TakeWhile(p => p <= Math.Sqrt(n))
+				.All(p => n % p != 0);
+		}
 	}
 }

@@ -7,6 +7,8 @@ namespace ProjectEuler.Core
 {
 	public static class NumberHelper
 	{
+		public static bool IsPrime(this int n) => Prime.IsPrime(n);
+
 		public static IEnumerable<int> Divisors(this int n)
 		{
 			return Divisors((long)n).Select(i => (int)i);
