@@ -5,9 +5,9 @@ namespace ProjectEuler.Core
 {
 	public static class EnumerableHelper
 	{
-		public static IEnumerable<IEnumerable<T>> Perm<T>(this IEnumerable<T> items, int k = -1)
+		public static IEnumerable<IEnumerable<T>> Perm<T>(this IEnumerable<T> items, int? k = null)
 		{
-			if (k == -1)
+			if (k == null)
 				k = items.Count();
 
 			if (k == 0)
@@ -18,6 +18,22 @@ namespace ProjectEuler.Core
 			{
 				var xs = items.Where((_, index) => i != index);
 				foreach (var c in Perm(xs, k - 1))
+					yield return c.Before(x);
+
+				i++;
+			}
+		}
+
+		public static IEnumerable<IEnumerable<T>> Comb<T>(this IEnumerable<T> items, int r)
+		{
+			if (r == 0)
+				yield return Enumerable.Empty<T>();
+
+			var i = 1;
+			foreach (var x in items)
+			{
+				var xs = items.Skip(i);
+				foreach (var c in Comb(xs, r - 1))
 					yield return c.Before(x);
 
 				i++;
