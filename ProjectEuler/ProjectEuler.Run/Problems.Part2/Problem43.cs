@@ -90,7 +90,7 @@ namespace ProjectEuler.Run.Problems.Part2
 				{
 					var nextd = d.Except(p);
 					foreach (var f in F(nextd, p, n + 1))
-						yield return f.AddBefore(pn);
+						yield return f.Before(pn);
 				}
 				else
 				{
@@ -189,7 +189,7 @@ namespace ProjectEuler.Run.Problems.Part2
 						if (i == 0)
 							yield return c.Concat(f);
 						else
-							yield return f.AddBefore(c.Last());
+							yield return f.Before(c.Last());
 					}
 				}
 				else

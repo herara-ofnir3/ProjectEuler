@@ -19,24 +19,50 @@ namespace ProjectEuler.Run.Problems.Part2
 	{
 		public override string Run()
 		{
+			// 4桁の素数を全て求める。
 			var primes = Primes(10000 - 1)
 				.SkipWhile(p => p < 1000)
+				.OrderBy(p => p)
 				.ToList();
 
-			return string.Empty;
+			// 同じ数字の桁で構成される素数をグループ化する。
+			// 答えは3項の等差数列なので、3項以下のグループは捨てる。
+			var sameDigits = primes
+				.Select(p => (n: p, d: string.Join("", p.Digits().OrderBy(d => d))))
+				.GroupBy(x => x.d, x => x.n)
+				.Where(x =>  3 <= x.Count())
+				.ToList();
+
+			var list = new List<(int a, int b, int c)>();
+			foreach (var seq in sameDigits)
+			{
+				// グループ内から等差数列を探す。
+				// グループ化された数字から3項の組み合わせを列挙し、等差数列になっているか判定する。
+				var l = Comb(seq, 3)
+					.Select(comb => comb.OrderBy(c => c))
+					.Select(comb => (a: comb.ElementAt(0), b: comb.ElementAt(1), c: comb.ElementAt(2)))
+					.Where(x => x.c - x.b == x.b - x.a)
+					;
+
+				list.AddRange(l);
+			}
+
+			// 見つかった2つのうち、問題文に明記されている方を除外したら答えが得られる
+			var answer = list.Single(x => !x.Equals((1487, 4817, 8147)));
+			return answer.ToString();
 		}
 
-		static IEnumerable<IEnumerable<int>> Comb(IEnumerable<int> items, int r)
+		static IEnumerable<IEnumerable<T>> Comb<T>(IEnumerable<T> items, int r)
 		{
 			if (r == 0)
-				yield return Enumerable.Empty<int>();
+				yield return Enumerable.Empty<T>();
 
 			var i = 1;
 			foreach (var x in items)
 			{
 				var xs = items.Skip(i);
 				foreach (var c in Comb(xs, r - 1))
-					yield return c.AddBefore(x);
+					yield return c.Before(x);
 
 				i++;
 			}

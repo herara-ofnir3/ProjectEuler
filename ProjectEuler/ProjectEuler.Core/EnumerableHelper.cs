@@ -8,33 +8,23 @@ namespace ProjectEuler.Core
 		public static IEnumerable<IEnumerable<T>> Perm<T>(this IEnumerable<T> items, int k = -1)
 		{
 			if (k == -1)
-			{
 				k = items.Count();
-			}
 
-			if (0 < k)
+			if (k == 0)
+				yield return Enumerable.Empty<T>();
+
+			var i = 0;
+			foreach (var x in items)
 			{
-				var i = 0;
-				foreach (var item in items)
-				{
-					var single = true;
-					var without = items.Where((x, index) => index != i);
+				var xs = items.Where((_, index) => i != index);
+				foreach (var c in Perm(xs, k - 1))
+					yield return c.Before(x);
 
-					foreach (var p in without.Perm(k - 1))
-					{
-						yield return p.AddBefore(item);
-						single = false;
-					}
-
-					if (single)
-						yield return FromSingle(item);
-
-					i++;
-				}
+				i++;
 			}
 		}
 
-		public static IEnumerable<T> AddBefore<T>(this IEnumerable<T> items, T first)
+		public static IEnumerable<T> Before<T>(this IEnumerable<T> items, T first)
 		{
 			yield return first;
 
@@ -42,7 +32,7 @@ namespace ProjectEuler.Core
 				yield return i;
 		}
 
-		public static IEnumerable<T> AddAfter<T>(this IEnumerable<T> items, T last)
+		public static IEnumerable<T> After<T>(this IEnumerable<T> items, T last)
 		{
 			foreach (var i in items)
 				yield return i;
