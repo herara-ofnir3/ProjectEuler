@@ -69,6 +69,9 @@
     <Compile Include="Problems.Part2\Problem49.cs" />
     <Compile Include="Problems.Part2\Problem50.cs" />
     <Compile Include="Problems.Part3\Problem51.cs" />
+    <Compile Include="Problems.Part3\Problem52.cs" />
+    <Compile Include="Problems.Part3\Problem53.cs" />
+    <Compile Include="Problems.Part3\Problem54.cs" />
     <Compile Include="Problems\Problem21.cs" />
     <Compile Include="Problems\Problem22.cs" />
     <Compile Include="Problems\Problem23.cs" />
@@ -128,6 +131,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Problem42\words.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Problem54\poker.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
