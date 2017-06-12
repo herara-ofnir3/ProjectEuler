@@ -20,18 +20,30 @@ namespace ProjectEuler.Run.Problems.Part3
 			var digits = Enumerable.Range(0, 10).ToArray();
 			var answer = 0;
 
+			// 桁を置き換えて目的の数の素数を見つけられるパターンを探します。
 			foreach (var prime in Prime.Gen())
 			{
 				var pdigits = prime.Digits();
-				var list = pdigits
-					.Select((_, i) => (
+
+				// 置き換える桁のインデックスを生成する。
+				// 例えば 56003(index=>43210) なら一桁ずつ試すパターン＋同じ値の桁(0)が二つあるので、
+				// [ [4(5)], [3(6)], [2(0)], [1(0)], [0(3)], [2(0), 1(0)] ] の桁置換を試します。
+				var indexes = pdigits
+					.Select((d, i) => new { d, i })
+					.GroupBy(x => x.d, x => x.i)
+					.SelectMany(x => x.SelectMany((y, i) => x.Comb(i + 1)));
+
+				// [0-9]の桁と上で生成したインデックスをかけ合わせて全ての置換パターンを生成します。
+				var patterns = indexes
+					.Select(i => (
 						index: i, 
-						other: digits.Select(d => Rep(pdigits, i, d))
-							.Select(r => r.DigitsToInt())
+						other: digits
+							.Select(d => Rep(pdigits, i, d).DigitsToInt())
 							.Where(r => r.Digits().Count() == pdigits.Count())
 							.Where(r => r.IsPrime())));
 
-				if (list.Any(x => x.other.Count() == 7))
+				// パターンの中に目的の項数のものがあれば処理を終了します。
+				if (patterns.Any(x => x.other.Count() == 8))
 				{
 					answer = prime;
 					break;
@@ -41,12 +53,12 @@ namespace ProjectEuler.Run.Problems.Part3
 			return answer.ToString();
 		}
 
-		static IEnumerable<int> Rep(IEnumerable<int> items, int index, int n)
+		static IEnumerable<int> Rep(IEnumerable<int> items, IEnumerable<int> indexes, int n)
 		{
 			var i = 0;
 			foreach (var item in items)
 			{
-				if (i == index)
+				if (indexes.Contains(i))
 					yield return n;
 				else
 					yield return item;
