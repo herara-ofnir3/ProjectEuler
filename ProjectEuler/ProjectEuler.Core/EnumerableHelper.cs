@@ -11,32 +11,40 @@ namespace ProjectEuler.Core
 				k = items.Count();
 
 			if (k == 0)
-				yield return Enumerable.Empty<T>();
-
-			var i = 0;
-			foreach (var x in items)
 			{
-				var xs = items.Where((_, index) => i != index);
-				foreach (var c in Perm(xs, k - 1))
-					yield return c.Before(x);
+				yield return Enumerable.Empty<T>();
+			}
+			else
+			{
+				var i = 0;
+				foreach (var x in items)
+				{
+					var xs = items.Where((_, index) => i != index);
+					foreach (var c in Perm(xs, k - 1))
+						yield return c.Before(x);
 
-				i++;
+					i++;
+				}
 			}
 		}
 
 		public static IEnumerable<IEnumerable<T>> Comb<T>(this IEnumerable<T> items, int r)
 		{
 			if (r == 0)
-				yield return Enumerable.Empty<T>();
-
-			var i = 1;
-			foreach (var x in items)
 			{
-				var xs = items.Skip(i);
-				foreach (var c in Comb(xs, r - 1))
-					yield return c.Before(x);
+				yield return Enumerable.Empty<T>();
+			}
+			else
+			{
+				var i = 1;
+				foreach (var x in items)
+				{
+					var xs = items.Skip(i);
+					foreach (var c in Comb(xs, r - 1))
+						yield return c.Before(x);
 
-				i++;
+					i++;
+				}
 			}
 		}
 
@@ -59,6 +67,16 @@ namespace ProjectEuler.Core
 		public static IEnumerable<T> FromSingle<T>(T item)
 		{
 			yield return item;
+		}
+
+		public static IEnumerable<IEnumerable<T>> Chunks<T>(this IEnumerable<T> items, int size)
+		{
+			if (items.Any())
+			{
+				yield return items.Take(size);
+				foreach (var c in Chunks(items.Skip(size), size))
+					yield return c;
+			}
 		}
 	}
 }

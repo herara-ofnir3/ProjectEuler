@@ -8,6 +8,7 @@ namespace ProjectEuler.Core
 	public static class NumberHelper
 	{
 		public static bool IsPrime(this int n) => Prime.IsPrime(n);
+		public static bool IsPrime(this BigInteger n) => Prime.IsPrime(n);
 
 		public static IEnumerable<int> Divisors(this int n)
 		{
@@ -65,7 +66,7 @@ namespace ProjectEuler.Core
 			}
 		}
 
-		public static IEnumerable<long> Digits(this long n, int b = 10)
+		public static IEnumerable<int> Digits(this long n, int b = 10)
 		{
 			if (n == 0)
 				yield return 0;
@@ -73,12 +74,12 @@ namespace ProjectEuler.Core
 			var q = n;
 			while (q != 0)
 			{
-				yield return q % b;
+				yield return (int)(q % b);
 				q /= b;
 			}
 		}
 
-		public static IEnumerable<BigInteger> Digits(this BigInteger n, int b = 10)
+		public static IEnumerable<int> Digits(this BigInteger n, int b = 10)
 		{
 			if (n == 0)
 				yield return 0;
@@ -86,12 +87,13 @@ namespace ProjectEuler.Core
 			var q = n;
 			while (q != 0)
 			{
-				yield return q % b;
+				yield return (int)(q % b);
 				q = q / b;
 			}
 		}
 
 		public static int DigitsToInt(this IEnumerable<int> digits) => digits.Select((x, i) => x * (int)Math.Pow(10, i)).Sum();
 		public static long DigitsToLong(this IEnumerable<int> digits) => digits.Select((x, i) => x * (long)Math.Pow(10, i)).Sum();
+		public static BigInteger DigitsToBigInteger(this IEnumerable<int> digits) => digits.Select((x, i) => x * (BigInteger)Math.Pow(10, i)).Aggregate((a, b) => a + b);
 	}
 }

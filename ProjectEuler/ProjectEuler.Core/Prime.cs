@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace ProjectEuler.Core
 {
@@ -49,7 +50,8 @@ namespace ProjectEuler.Core
 		public static IEnumerable<int> Gen()
 		{
 			var last = 0;
-			foreach (var p in _primes)
+			var cache = _primes.ToList();
+			foreach (var p in cache)
 			{
 				yield return p;
 				last = p;
@@ -71,6 +73,15 @@ namespace ProjectEuler.Core
 
 			return Gen()
 				.TakeWhile(p => p <= Math.Sqrt(n))
+				.All(p => n % p != 0);
+		}
+
+		public static bool IsPrime(BigInteger n)
+		{
+			if (n < 2) return false;
+
+			return Gen()
+				.TakeWhile(p => p <= Math.Sqrt((double)n))
 				.All(p => n % p != 0);
 		}
 	}

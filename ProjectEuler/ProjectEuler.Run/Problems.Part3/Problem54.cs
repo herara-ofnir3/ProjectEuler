@@ -103,19 +103,96 @@ namespace ProjectEuler.Run.Problems.Part3
 
 			public Rank Rank()
 			{
-				if (IsRoyalFlush())
-					return new Rank(RankType.RoyalFlush, 0);
+				var highcard = _cards.Max(c => c.number);
+				var flush = Flush();
+				var straight = Straight();
 
-				if (IsFlush() && IsStraight())
-					return new Rank(RankType.StraightFlush, _cards.Max(c => c.number));
+				if (flush.Any() && straight.Any() && straight.Max() == 14)
+					return new Rank(RankType.RoyalFlush, straight, highcard);
 
-				return new Rank();
+				if (flush.Any() && straight.Any())
+					return new Rank(RankType.StraightFlush, straight, highcard);
+
+				var fourOfKind = FourOfKind();
+				if (fourOfKind.Any())
+					return new Rank(RankType.FourOfAKind, fourOfKind, highcard);
+
+				var threeOfKind = ThreeOfKind();
+				var onePair = OnePair();
+
+				if (threeOfKind.Any() && onePair.Any())
+					return new Rank(RankType.FullHouse, threeOfKind.Concat(onePair), highcard);
+
+				if (flush.Any())
+					return new Rank(RankType.Flush, flush, highcard);
+
+				if (straight.Any())
+					return new Rank(RankType.Straight, straight, highcard);
+
+				if (threeOfKind.Any())
+					return new Rank(RankType.ThreeOfAKind, threeOfKind, highcard);
+
+				var twoPair = TwoPair();
+				if (twoPair.Any())
+					return new Rank(RankType.TwoPair, twoPair, highcard);
+
+				if (onePair.Any())
+					return new Rank(RankType.OnePair, onePair, highcard);
+
+				return new Rank(RankType.HighCard, _cards.Select(c => c.number), highcard);
+			}
+			
+			IEnumerable<int> FourOfKind()
+			{
+				var found = _cards.GroupBy(c => c.number).Where(g => g.Count() == 4);
+				if (found.Any())
+					return found.Single().Select(x => x.number);
+
+				return Enumerable.Empty<int>();
 			}
 
-			bool IsRoyalFlush() => IsFlush() && IsStraight() && _cards[0].number == 10;
-			bool IsFlush() => _cards.GroupBy(c => c.suit).Count() == 0;
-			bool IsStraight() => _cards.Select((c, i) => new { c, i }).Skip(1).All(x => x.c.number == _cards[x.i - 1].number + 1);
-			
+			IEnumerable<int> Flush()
+			{
+				if (_cards.GroupBy(c => c.suit).Count() == 1)
+					return _cards.Select(c => c.number);
+
+				return Enumerable.Empty<int>();
+			}
+
+			IEnumerable<int> Straight()
+			{
+				if (_cards.Select((c, i) => new { c, i }).Skip(1).All(x => x.c.number == _cards[x.i - 1].number + 1))
+					return _cards.Select(c => c.number);
+
+				return Enumerable.Empty<int>();
+			}
+
+			IEnumerable<int> ThreeOfKind()
+			{
+				var found = _cards.GroupBy(c => c.number).Where(g => g.Count() == 3);
+				if (found.Any())
+					return found.Single().Select(c => c.number);
+
+				return Enumerable.Empty<int>();
+			}
+
+			IEnumerable<int> TwoPair()
+			{
+				var found = _cards.GroupBy(c => c.number).Where(g => g.Count() == 2);
+				if (found.Count() == 2)
+					return found.SelectMany(x => x.Select(c => c.number));
+
+				return Enumerable.Empty<int>();
+			}
+
+			IEnumerable<int> OnePair()
+			{
+				var found = _cards.GroupBy(c => c.number).Where(g => g.Count() == 2);
+				if (found.Count() == 1)
+					return found.Single().Select(x => x.number);
+
+				return Enumerable.Empty<int>();
+			}
 		}
 
 		enum Suit
@@ -126,15 +203,18 @@ namespace ProjectEuler.Run.Problems.Part3
 			Heart,
 		}
 
-		struct Rank : IComparable<Rank>
+		class Rank : IComparable<Rank>
 		{
-			public Rank(RankType type, int weight)
+			public Rank(RankType type, IEnumerable<int> numbers, int highCard)
 			{
-				Type = type; Weight = weight;
+				Type = type;
+				Numbers = numbers.OrderByDescending(x => x).ToArray();
+				HighCard = highCard;
 			}
 
 			public RankType Type { get; }
-			public int Weight { get; }
+			public int[] Numbers { get; }
+			public int HighCard { get; }
 
 			public int CompareTo(Rank other)
 			{
@@ -142,7 +222,17 @@ namespace ProjectEuler.Run.Problems.Part3
 				if (typeCompared != 0)
 					return typeCompared;
 
-				return Weight.CompareTo(other.Weight);
+				var count = new[] { Numbers.Count(), other.Numbers.Count() }.Max();
+				for (var i = 0; i < count; i++)
+				{
+					var t = Numbers.ElementAtOrDefault(i);
+					var o = other.Numbers.ElementAtOrDefault(i);
+					var compared = t.CompareTo(o);
+					if (compared != 0)
+						return compared;
+				}
+
+				return HighCard.CompareTo(other.HighCard);
 			}
 		}
 

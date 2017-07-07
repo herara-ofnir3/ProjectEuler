@@ -72,6 +72,28 @@
     <Compile Include="Problems.Part3\Problem52.cs" />
     <Compile Include="Problems.Part3\Problem53.cs" />
     <Compile Include="Problems.Part3\Problem54.cs" />
+    <Compile Include="Problems.Part3\Problem55.cs" />
+    <Compile Include="Problems.Part3\Problem56.cs" />
+    <Compile Include="Problems.Part3\Problem57.cs" />
+    <Compile Include="Problems.Part3\Problem58.cs" />
+    <Compile Include="Problems.Part3\Problem59.cs" />
+    <Compile Include="Problems.Part3\Problem60.cs" />
+    <Compile Include="Problems.Part3\Problem61.cs" />
+    <Compile Include="Problems.Part3\Problem62.cs" />
+    <Compile Include="Problems.Part3\Problem63.cs" />
+    <Compile Include="Problems.Part3\Problem64.cs" />
+    <Compile Include="Problems.Part3\Problem65.cs" />
+    <Compile Include="Problems.Part3\Problem66.cs" />
+    <Compile Include="Problems.Part3\Problem67.cs" />
+    <Compile Include="Problems.Part3\Problem68.cs" />
+    <Compile Include="Problems.Part3\Problem69.cs" />
+    <Compile Include="Problems.Part3\Problem70.cs" />
+    <Compile Include="Problems.Part3\Problem71.cs" />
+    <Compile Include="Problems.Part3\Problem72.cs" />
+    <Compile Include="Problems.Part3\Problem73.cs" />
+    <Compile Include="Problems.Part3\Problem74.cs" />
+    <Compile Include="Problems.Part3\Problem75.cs" />
+    <Compile Include="Problems.Part4\Problem76.cs" />
     <Compile Include="Problems\Problem21.cs" />
     <Compile Include="Problems\Problem22.cs" />
     <Compile Include="Problems\Problem23.cs" />
@@ -134,6 +156,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Problem54\poker.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Problem59\cipher.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Problem67\triangle.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
